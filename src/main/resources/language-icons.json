@@ -1,3 +1,10 @@
 {
-  ".java": "BootstrapIcons.CUP"
+  "java": {
+    "class": "BootstrapIcons.CUP",
+    "color": "#2196F3"
+  },
+  "md": {
+    "class": "Devicons.MARKDOWN",
+    "color": "#cc0001"
+  }
 }

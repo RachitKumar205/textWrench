@@ -5,11 +5,14 @@ import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
 import org.kordamp.ikonli.bootstrapicons.BootstrapIcons;
+import org.kordamp.ikonli.devicons.Devicons;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,7 +22,7 @@ public class ProjectItem {
     private boolean isDirectory;
     private List<ProjectItem> children;
     private Node icon;
-    private static Map<String, String> extensionToIconMap;
+    private static Map<String, IconConfig> extensionToIconMap;
 
     static {
         // Load icon configuration from JSON
@@ -43,28 +46,40 @@ public class ProjectItem {
                 throw new IOException("Config file not found in resources folder.");
             }
 
-            // Read the configuration into a Map
-            extensionToIconMap = objectMapper.readValue(configStream, Map.class);
+            // Read the configuration into a JsonNode
+            JsonNode rootNode = objectMapper.readTree(configStream);
+
+            extensionToIconMap = new HashMap<>();
+
+            // Iterate through each language and add to the map
+            rootNode.fieldNames().forEachRemaining(language -> {
+                JsonNode languageNode = rootNode.get(language);
+                String iconClass = languageNode.get("class").asText();
+                String color = languageNode.get("color").asText();
+                extensionToIconMap.put(language, new IconConfig(iconClass, color));
+            });
+
         } catch (IOException e) {
             e.printStackTrace();
-            extensionToIconMap = Map.of(); // In case of error, use an empty map
+            extensionToIconMap = new HashMap<>(); // In case of error, use an empty map
         }
     }
 
     public Node determineIcon() {
         if (isDirectory) {
             // Folder icon in a muted color
-            return createIcon(BootstrapIcons.FOLDER2, "#607D8B");
+            return createIcon(BootstrapIcons.FOLDER2, "#ced0d5");
         } else {
             String fileName = name.toLowerCase();
             String extension = getFileExtension(fileName);
-            String iconCode = extensionToIconMap.get(extension);
-            if (iconCode != null) {
+            IconConfig iconConfig = extensionToIconMap.get(extension);
+
+            if (iconConfig != null) {
                 // Icon found in config
-                return createIcon(getIconFromString(iconCode), "#2196F3");
+                return createIconFromConfig(iconConfig);
             } else {
                 // Generic file icon in gray
-                return createIcon(BootstrapIcons.FILE_EARMARK_CODE, "#ffffff");
+                return createIcon(BootstrapIcons.FILE_EARMARK_CODE, "#c87d55");
             }
         }
     }
@@ -72,26 +87,31 @@ public class ProjectItem {
     public String getFileExtension(String fileName) {
         int dotIndex = fileName.lastIndexOf('.');
         if (dotIndex != -1) {
-            return fileName.substring(dotIndex).toLowerCase();
+            return fileName.substring(dotIndex + 1).toLowerCase();  // Remove the dot
         }
         return "";
     }
 
     public Node createIcon(Ikon iconCode, String color) {
-        FontIcon icon = new FontIcon(iconCode);  // Directly passing the Ikon object
+        FontIcon icon = new FontIcon(iconCode);
         icon.setIconSize(20);
         icon.setIconColor(javafx.scene.paint.Color.valueOf(color));
         return icon;
     }
 
+    public Node createIconFromConfig(IconConfig iconConfig) {
+        Ikon icon = getIconFromString(iconConfig.getIconClass());
+        return createIcon(icon, iconConfig.getColor());
+    }
 
-    public Ikon getIconFromString(String iconCode) {
+    public Ikon getIconFromString(String iconClass) {
         try {
-            // Directly map the icon code string to the Ikon
-            if (iconCode.startsWith("Material.")) {
-                return (Ikon) Enum.valueOf(Material.class, iconCode.substring(9));  // Remove "Material."
-            } else if (iconCode.startsWith("BootstrapIcons.")) {
-                return (Ikon) Enum.valueOf(BootstrapIcons.class, iconCode.substring(15));  // Remove "BootstrapIcons."
+            if (iconClass.startsWith("Material.")) {
+                return (Ikon) Enum.valueOf(Material.class, iconClass.substring(9));  // Remove "Material."
+            } else if (iconClass.startsWith("BootstrapIcons.")) {
+                return (Ikon) Enum.valueOf(BootstrapIcons.class, iconClass.substring(15));  // Remove "BootstrapIcons."
+            } else if (iconClass.startsWith("Devicons.")) {
+                return (Ikon) Enum.valueOf(Devicons.class, iconClass.substring(9));  // Remove "Devicons."
             } else {
                 return BootstrapIcons.FILE_EARMARK_CODE;  // Fallback to a default icon
             }
@@ -100,7 +120,6 @@ public class ProjectItem {
             return BootstrapIcons.FILE_EARMARK_CODE;  // Fallback icon in case of error
         }
     }
-
 
     public void addChild(ProjectItem child) {
         children.add(child);
@@ -124,5 +143,23 @@ public class ProjectItem {
 
     public Node getIcon() {
         return icon;
+    }
+
+    public static class IconConfig {
+        private String iconClass;
+        private String color;
+
+        public IconConfig(String iconClass, String color) {
+            this.iconClass = iconClass;
+            this.color = color;
+        }
+
+        public String getIconClass() {
+            return iconClass;
+        }
+
+        public String getColor() {
+            return color;
+        }
     }
 }
