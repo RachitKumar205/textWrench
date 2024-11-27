@@ -1,8 +1,10 @@
 package com.example.textwrench;
 
+import com.example.textwrench.IconLoader.IconConfigLoader;
 import com.example.textwrench.model.ProjectItem;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -17,6 +19,7 @@ import org.kordamp.ikonli.material.Material;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -41,9 +44,12 @@ public class TextEditorController {
 
     private ExecutorService executor;
 
+    private Map<String, ProjectItem.IconConfig> extensionToIconMap;
+
     @FXML
     public void initialize() {
         executor = Executors.newSingleThreadExecutor();
+        extensionToIconMap = IconConfigLoader.loadIconConfiguration();
         // Setup keyboard shortcuts
         setupKeyboardShortcuts();
         menuBar.useSystemMenuBarProperty().set(true);
@@ -91,8 +97,11 @@ public class TextEditorController {
             codeArea.replaceText(content);
         }
 
+        Node iconNode = new IconConfigLoader().determineFileIcon(tabName);
+
         Tab tab = new Tab(tabName);
         tab.setContent(codeArea);
+        tab.setGraphic(iconNode);
 
         // Add close request handler
         tab.setOnCloseRequest(event -> {

@@ -11,10 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ProjectItem {
     private String name;
@@ -68,7 +65,7 @@ public class ProjectItem {
     public Node determineIcon() {
         if (isDirectory) {
             // Folder icon in a muted color
-            return createIcon(BootstrapIcons.FOLDER2, "#ced0d5");
+            return createIcon(BootstrapIcons.FOLDER2, "#ced0d5", 20);
         } else {
             String fileName = name.toLowerCase();
             String extension = getFileExtension(fileName);
@@ -79,7 +76,7 @@ public class ProjectItem {
                 return createIconFromConfig(iconConfig);
             } else {
                 // Generic file icon in gray
-                return createIcon(BootstrapIcons.FILE_EARMARK_CODE, "#c87d55");
+                return createIcon(BootstrapIcons.FILE_EARMARK_CODE, "#c87d55", 20);
             }
         }
     }
@@ -92,16 +89,16 @@ public class ProjectItem {
         return "";
     }
 
-    public Node createIcon(Ikon iconCode, String color) {
+    public Node createIcon(Ikon iconCode, String color, int size) {
         FontIcon icon = new FontIcon(iconCode);
-        icon.setIconSize(20);
+        icon.setIconSize(size);
         icon.setIconColor(javafx.scene.paint.Color.valueOf(color));
         return icon;
     }
 
     public Node createIconFromConfig(IconConfig iconConfig) {
         Ikon icon = getIconFromString(iconConfig.getIconClass());
-        return createIcon(icon, iconConfig.getColor());
+        return createIcon(icon, iconConfig.getColor(), 20);
     }
 
     public Ikon getIconFromString(String iconClass) {
