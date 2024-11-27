@@ -7,11 +7,12 @@ module com.example.textwrench {
     requires org.kordamp.bootstrapfx.core;
     requires org.kordamp.ikonli.materialdesign;
     requires org.kordamp.ikonli.material;
-    requires org.kordamp.ikonli.core;
     requires org.fxmisc.richtext;
     requires reactfx;
     requires org.eclipse.lsp4j.jsonrpc;
     requires org.eclipse.lsp4j;
+    requires org.kordamp.ikonli.bootstrapicons;
+    requires org.kordamp.ikonli.core;
 
     opens com.example.textwrench to javafx.fxml;
     exports com.example.textwrench;

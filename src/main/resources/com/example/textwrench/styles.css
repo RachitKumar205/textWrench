@@ -155,38 +155,41 @@
 /* Tab Pane Styling */
 .tab-pane {
     -fx-background-color: #2b2b2b; /* Match CodeArea background */
+    -fx-padding: 0px;
 }
 
-.tab-pane .tab-header-area {
-    -fx-background-color: #2d2d2d; /* Similar to menu bar */
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {-fx-border-color: transparent;}
+
+.tab-header-area .tab-header-background {
+    -fx-background-color: #1e1e1e; /* Similar to menu bar */
 }
 
 .tab-pane .tab {
     -fx-background-color: #2d2d2d;
-    -fx-padding: 5 10 5 10;
-    -fx-background-radius: 0;
-    -fx-border-color: transparent;
+    -fx-padding: 2 10 2 10;
+    -fx-background-radius: 5;
+    -fx-font-size: 14px;
+    -fx-text-overflow: ellipsis; /* Show ellipsis for overflow text */
+    -fx-ellipsis: true; /* Ensure the text truncation happens */
+    -fx-wrap-text: false; /* Prevent wrapping, so text stays in one line */
+    -fx-halignment: center; /* Center the text inside the tab */
 }
 
 .tab-pane .tab .tab-label {
-    -fx-text-fill: #a0a0a0; /* Subtle text color */
+    -fx-text-fill: #ffffff; /* Subtle text color */
 }
 
 .tab-pane .tab:selected {
     -fx-background-color: #3c3c3c; /* Slightly lighter when selected */
+    -fx-min-width: 400;
 }
 
 .tab-pane .tab:selected .tab-label {
-    -fx-text-fill: #d4d4d4; /* Brighter text when selected */
+    -fx-text-fill: #ffffff; /* Brighter text when selected */
 }
 
 .tab-pane .tab:hover {
     -fx-background-color: #414141; /* Hover effect */
-}
-
-.tab-pane .tab-close-button {
-    -fx-background-color: transparent;
-    -fx-background-radius: 0;
 }
 
 .tab-pane .tab-close-button:hover {
@@ -198,11 +201,7 @@
 }
 
 .tab-header-area {
-    -fx-background-color: #2C2C2C; /* Set the desired background color */
-}
-
-.tab-pane > .tab-header-area {
-    -fx-background-color: #2C2C2C; /* Set the desired background color */
+    -fx-padding: 4 4 2 4;
 }
 
 #codeArea .text {

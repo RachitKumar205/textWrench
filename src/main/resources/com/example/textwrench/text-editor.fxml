@@ -40,7 +40,7 @@
         </MenuBar>
 
         <!-- Tabbed Interface -->
-        <TabPane fx:id="tabPane" VBox.vgrow="ALWAYS" styleClass="text-area">
+        <TabPane tabClosingPolicy="ALL_TABS" fx:id="tabPane" VBox.vgrow="ALWAYS" styleClass="text-area">
             <!-- Tabs will be dynamically added here -->
         </TabPane>
 

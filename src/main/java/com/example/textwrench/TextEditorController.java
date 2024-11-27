@@ -253,25 +253,31 @@ public class TextEditorController {
                 if (empty || item == null) {
                     setText(null);
                     setGraphic(null);
+                    setStyle("-fx-background-color: transparent;"); // Clear background color
                 } else {
                     setText(item.getName());
 
-                    // Use Ikonli Material icons
-                    FontIcon icon;
-                    if (item.isDirectory()) {
-                        icon = new FontIcon(Material.FOLDER);
-                    } else {
-                        icon = new FontIcon(Material.INSERT_DRIVE_FILE);
-                    }
-
-                    icon.setIconSize(16);
-                    setGraphic(icon);
+                    // Use the icon from ProjectItem's determineIcon method
+                    setGraphic(item.determineIcon());
+                    setStyle(""); // Reset the style
                 }
             }
         });
 
-        // Handle double-click to open files
+        // Disable selection and interaction when no project is loaded
+        projectExplorer.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+            if (currentProject == null) {
+                projectExplorer.getSelectionModel().clearSelection();
+                projectExplorer.setStyle("-fx-background-color: transparent;"); // Clear background color
+            } else {
+                projectExplorer.setStyle(""); // Reset the style
+            }
+        });
+
+        // Modify mouse click event to only work when a project is loaded
         projectExplorer.setOnMouseClicked(event -> {
+            if (currentProject == null) return; // Exit if no project is loaded
+
             if (event.getClickCount() == 2) {
                 TreeItem<ProjectItem> selectedItem = projectExplorer.getSelectionModel().getSelectedItem();
                 if (selectedItem != null && !selectedItem.getValue().isDirectory()) {

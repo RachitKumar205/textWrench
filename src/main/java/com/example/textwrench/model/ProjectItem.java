@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
+import org.kordamp.ikonli.bootstrapicons.BootstrapIcons;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,10 +24,10 @@ public class ProjectItem {
         this.icon = determineIcon();
     }
 
-    private Node determineIcon() {
+    public Node determineIcon() {
         if (isDirectory) {
             // Folder icon in a muted color
-            return createIcon(Material.FOLDER, "#607D8B");
+            return createIcon(BootstrapIcons.FOLDER2, "#607D8B");
         } else {
             String fileName = name.toLowerCase();
             if (fileName.endsWith(".txt")) {
@@ -34,14 +35,14 @@ public class ProjectItem {
                 return createIcon(Material.NOTE, "#2196F3");
             } else {
                 // Generic file icon in gray
-                return createIcon(Material.INSERT_DRIVE_FILE, "#9E9E9E");
+                return createIcon(BootstrapIcons.FILE_EARMARK_CODE, "#ffffff");
             }
         }
     }
 
-    private Node createIcon(Enum<?> iconCode, String color) {
+    public Node createIcon(Enum<?> iconCode, String color) {
         FontIcon icon = new FontIcon((Ikon) iconCode);
-        icon.setIconSize(16);
+        icon.setIconSize(20);
         icon.setIconColor(javafx.scene.paint.Color.valueOf(color));
         return icon;
     }
