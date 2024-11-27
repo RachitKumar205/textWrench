@@ -2,7 +2,6 @@ package com.example.textwrench;
 
 import com.example.textwrench.model.ProjectItem;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.DirectoryChooser;
@@ -25,8 +24,6 @@ import java.util.concurrent.Executors;
 import static com.example.textwrench.service.ProjectService.loadProject;
 
 public class TextEditorController {
-    @FXML
-    private CodeArea codeArea;
 
     @FXML
     private Label statusBar;
@@ -41,8 +38,6 @@ public class TextEditorController {
     private TreeView<ProjectItem> projectExplorer;
 
     private ProjectItem currentProject;
-
-    private File currentFile;
 
     private ExecutorService executor;
 

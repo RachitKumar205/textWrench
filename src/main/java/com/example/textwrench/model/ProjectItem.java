@@ -4,7 +4,6 @@ import javafx.scene.Node;
 import org.kordamp.ikonli.Ikon;
 import org.kordamp.ikonli.javafx.FontIcon;
 import org.kordamp.ikonli.material.Material;
-import org.kordamp.ikonli.materialdesign.MaterialDesign;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;

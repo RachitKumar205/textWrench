@@ -3,7 +3,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<?import org.fxmisc.richtext.CodeArea?>
 <SplitPane xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.example.textwrench.TextEditorController"
            stylesheets="@styles.css"
