@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import org.fxmisc.richtext.CodeArea?>
+<SplitPane xmlns:fx="http://javafx.com/fxml"
+           fx:controller="com.example.textwrench.TextEditorController"
+           stylesheets="@styles.css"
+           dividerPositions="0.15">
+
+    <!-- Project Explorer Pane -->
+    <VBox styleClass="project-explorer">
+        <HBox styleClass="project-explorer-header">
+            <Label text="Project Explorer" HBox.hgrow="ALWAYS"/>
+            <Button text="Open Project" onAction="#openProject"/>
+        </HBox>
+
+        <TreeView fx:id="projectExplorer" VBox.vgrow="ALWAYS"/>
+    </VBox>
+
+    <!-- Right Pane with Menu, Tabs, and Status Bar -->
+    <VBox>
+        <!-- MenuBar -->
+        <MenuBar fx:id="menuBar">
+            <menus>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="New Tab" onAction="#createNewFile"/>
+                        <MenuItem text="Open Project" onAction="#openProject"/>
+                        <MenuItem text="Close Project" onAction="#closeProject"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="Open" onAction="#openFile"/>
+                        <MenuItem text="Save" onAction="#saveFile"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="Exit" onAction="#handleExit"/>
+                    </items>
+                </Menu>
+                <!-- Other menus -->
+            </menus>
+        </MenuBar>
+
+        <!-- Tabbed Interface -->
+        <TabPane fx:id="tabPane" VBox.vgrow="ALWAYS" styleClass="text-area">
+            <!-- Tabs will be dynamically added here -->
+        </TabPane>
+
+        <!-- Status Bar -->
+        <Label
+                fx:id="statusBar"
+                styleClass="status-bar"
+                text="Ready"/>
+    </VBox>
+</SplitPane>

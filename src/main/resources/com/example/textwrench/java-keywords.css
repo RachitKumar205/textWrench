@@ -1,0 +1,25 @@
+.keyword {
+    -rtfx-background-color: transparent;
+    -fx-fill: purple;
+    -fx-font-weight: bold;
+}
+
+.string {
+    -rtfx-background-color: transparent;
+    -fx-fill: blue;
+}
+
+.comment {
+    -rtfx-background-color: transparent;
+    -fx-fill: green;
+    -fx-font-style: italic;
+}
+
+.paren, .bracket, .brace, .semicolon {
+    -rtfx-background-color: transparent;
+    -fx-fill: darkgray;
+}
+
+.default-text {
+    -fx-fill: white;
+}
