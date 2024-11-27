@@ -13,6 +13,7 @@ module com.example.textwrench {
     requires org.eclipse.lsp4j;
     requires org.kordamp.ikonli.bootstrapicons;
     requires org.kordamp.ikonli.core;
+    requires com.fasterxml.jackson.databind;
 
     opens com.example.textwrench to javafx.fxml;
     exports com.example.textwrench;

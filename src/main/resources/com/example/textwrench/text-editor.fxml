@@ -15,7 +15,8 @@
             <Button text="Open Project" onAction="#openProject"/>
         </HBox>
 
-        <TreeView fx:id="projectExplorer" VBox.vgrow="ALWAYS"/>
+        <TreeView fx:id="projectExplorer" VBox.vgrow="ALWAYS">
+        </TreeView>
     </VBox>
 
     <!-- Right Pane with Menu, Tabs, and Status Bar -->

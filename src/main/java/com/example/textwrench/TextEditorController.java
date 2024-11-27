@@ -81,8 +81,6 @@ public class TextEditorController {
 
         // Line number and other setup
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
-        codeArea.getStyleClass().addAll("text-area");
-
         // Add status bar update listener
         codeArea.textProperty().addListener((obs, oldText, newText) -> {
             updateStatusBar();
