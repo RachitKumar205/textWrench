@@ -14,6 +14,7 @@ import org.fxmisc.richtext.LineNumberFactory;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.Objects;
 import java.util.Optional;
 
 public class TabManagementService {
@@ -31,7 +32,7 @@ public class TabManagementService {
 
         // Wrap the CodeArea in a VirtualizedScrollPane
         VirtualizedScrollPane scrollPane = new VirtualizedScrollPane(codeArea);
-        scrollPane.getStylesheets().add(getClass().getResource("virtual-scroll-pane.css").toExternalForm());
+        scrollPane.getStylesheets().add(Objects.requireNonNull(getClass().getResource("virtual-scroll-pane.css")).toExternalForm());
 
         codeArea.setParagraphGraphicFactory(LineNumberFactory.get(codeArea));
 

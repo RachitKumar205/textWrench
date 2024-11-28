@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 
 <SplitPane xmlns:fx="http://javafx.com/fxml"
-           fx:controller="com.example.textwrench.TextEditorController"
+           fx:controller="com.example.textwrench.CoreController"
            stylesheets="@styles.css"
            dividerPositions="0.15">
 
@@ -20,7 +20,7 @@
     </VBox>
 
     <!-- Right Pane with Menu, Tabs, and Status Bar -->
-    <VBox>
+    <VBox styleClass="rounded-vbox">
         <!-- MenuBar -->
         <MenuBar fx:id="menuBar">
             <menus>

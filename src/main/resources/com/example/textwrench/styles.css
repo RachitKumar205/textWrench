@@ -4,6 +4,8 @@
 .root {
     -fx-background-color: #1e1e1e; /* Dark gray background */
     -fx-text-base-color: #d4d4d4; /* Light gray text */
+    -fx-background-radius: 10px;  /* Rounded corners */
+    -fx-padding: 1px;            /* Optional padding inside */
 }
 
 /* Menu Bar */
@@ -25,6 +27,11 @@
 /* Split Pane Divider */
 .split-pane-divider {
     -fx-background-color: #333333; /* Divider color */
+}
+
+.split-pane {
+    -fx-background-color: #2b2b2b; /* Match CodeArea background */
+    -fx-background-radius: 0 0 10 10;
 }
 
 #codeArea .lineno {
@@ -87,6 +94,7 @@
     -fx-background-color: #252526; /* Explorer background */
     -fx-border-color: #3c3c3c;
     -fx-border-width: 0 1px 0 0;
+    -fx-background-radius: 0 0 10 10;
 }
 
 .project-explorer-header {
@@ -119,6 +127,15 @@
     -fx-text-fill: #dcdcdc;
 }
 
+.rounded-vbox {
+    -fx-background-color: #252526;
+    -fx-background-radius: 0 0 10 10;
+}
+
+#titleBar {
+    -fx-background-radius: 10 10 0 0;
+}
+
 .tree-view .tree-cell:hover {
     -fx-background-color: #3a3d41;
     -fx-background-radius: 5;
@@ -130,9 +147,15 @@
     -fx-background-radius: 5;
 }
 
+#projectExplorer {
+    -fx-background-radius: 0 0 0 10;
+    -fx-padding: 5 10 0 10;
+}
+
 .default {
     -fx-fill: white;
 }
+
 
 .keyword {
     -fx-fill: #569cd6; /* Blue */
@@ -196,9 +219,30 @@
     -fx-padding: 4 4 2 4;
 }
 
-.project-explorer .scroll-bar{
+.project-explorer .scroll-bar:vertical{
     -fx-background-color: transparent;
     -fx-text-fill: black;
+    -fx-pref-width: 10px;
+}
+
+.project-explorer .scroll-bar:horizontal{
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-pref-width: 10px;
+}
+
+
+.project-explorer .scroll-bar .thumb {
+    -fx-background-color: rgba(100, 100, 100, 0.5);
+    -fx-background-radius: 5em;
+}
+
+.project-explorer .scroll-bar .increment-button{
+    -fx-background-color: transparent;
+}
+
+.project-explorer .scroll-bar .decrement-button{
+    -fx-background-color: transparent;
 }
 
 .project-explorer .corner {
@@ -223,4 +267,19 @@
 
 #codeArea {
     -fx-background-color: #2b2b2b; /* Dark gray background */
+}
+
+#titleBar {
+    -fx-background-color: #2C2C2C;
+    -fx-padding: 5px;
+}
+
+.app-title {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.app-title:hover {
+    -fx-text-fill: lightgray;
 }

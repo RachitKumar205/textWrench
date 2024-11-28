@@ -6,7 +6,6 @@ import com.example.textwrench.coremodules.ProjectManagementService;
 import com.example.textwrench.coremodules.TabManagementService;
 import com.example.textwrench.coremodules.UIUtilityService;
 import com.example.textwrench.model.ProjectItem;
-import com.example.textwrench.service.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -14,14 +13,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
-import org.fxmisc.richtext.CodeArea;
-import org.kordamp.ikonli.material.Material;
 
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class TextEditorController {
+public class CoreController {
 
     @FXML
     private Label statusBar;
