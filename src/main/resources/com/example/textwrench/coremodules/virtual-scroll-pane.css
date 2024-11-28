@@ -1,0 +1,32 @@
+.virtualized-scroll-pane .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+.virtualized-scroll-pane .scroll-bar:vertical {
+    -fx-background-radius: 5em;
+    -fx-pref-width: 12px;
+}
+
+.virtualized-scroll-pane .scroll-bar:horizontal {
+    -fx-background-radius: 5em;
+    -fx-pref-height: 12px;
+}
+
+.virtualized-scroll-pane .scroll-bar .thumb {
+    -fx-background-color: rgba(100, 100, 100, 0.5);
+    -fx-background-radius: 5em;
+}
+
+.virtualized-scroll-pane .scroll-bar .thumb:hover {
+    -fx-background-color: rgba(100, 100, 100, 0.7);
+}
+
+.virtualized-scroll-pane .scroll-bar .increment-button,
+.virtualized-scroll-pane .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.virtualized-scroll-pane .scroll-bar .increment-arrow,
+.virtualized-scroll-pane .scroll-bar .decrement-arrow {
+    -fx-background-color: transparent;
+}

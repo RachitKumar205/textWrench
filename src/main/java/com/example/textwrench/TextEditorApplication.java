@@ -6,6 +6,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.IOException;
 import java.util.Objects;
 
@@ -22,6 +24,7 @@ public class TextEditorApplication extends Application {
             scene.getStylesheets().add(Objects.requireNonNull(getClass().getResource("styles.css")).toExternalForm());
 
             primaryStage.setTitle("textWrench");
+            primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.setScene(scene);
 
             // Set the window to full width and height on both macOS and Windows

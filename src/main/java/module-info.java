@@ -15,6 +15,7 @@ module com.example.textwrench {
     requires com.fasterxml.jackson.databind;
     requires org.kordamp.ikonli.devicons;
     requires org.kordamp.ikonli.core;
+    requires org.fxmisc.flowless;
 
     opens com.example.textwrench to javafx.fxml;
     exports com.example.textwrench;
