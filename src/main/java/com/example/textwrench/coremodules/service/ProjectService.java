@@ -1,6 +1,6 @@
-package com.example.textwrench.service;
+package com.example.textwrench.coremodules.service;
 
-import com.example.textwrench.model.ProjectItem;
+import com.example.textwrench.coremodules.model.ProjectItem;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Comparator;

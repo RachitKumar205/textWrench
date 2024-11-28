@@ -5,7 +5,7 @@ import com.example.textwrench.coremodules.FileManagementService;
 import com.example.textwrench.coremodules.ProjectManagementService;
 import com.example.textwrench.coremodules.TabManagementService;
 import com.example.textwrench.coremodules.UIUtilityService;
-import com.example.textwrench.model.ProjectItem;
+import com.example.textwrench.coremodules.model.ProjectItem;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

@@ -1,6 +1,6 @@
 package com.example.textwrench.coremodules;
 
-import com.example.textwrench.model.ProjectItem;
+import com.example.textwrench.coremodules.model.ProjectItem;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.control.TabPane;
@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 
-import static com.example.textwrench.service.ProjectService.loadProject;
+import static com.example.textwrench.coremodules.service.ProjectService.loadProject;
 
 public class ProjectManagementService {
     private TreeView<ProjectItem> projectExplorer;

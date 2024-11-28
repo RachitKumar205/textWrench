@@ -1,4 +1,4 @@
-package com.example.textwrench.model;
+package com.example.textwrench.coremodules.model;
 
 import javafx.scene.Node;
 import org.kordamp.ikonli.Ikon;

@@ -1,6 +1,6 @@
 package com.example.textwrench.IconLoader;
 
-import com.example.textwrench.model.ProjectItem;
+import com.example.textwrench.coremodules.model.ProjectItem;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import javafx.scene.Node;
