@@ -211,6 +211,55 @@
     -fx-background-color: #515459;
 }
 
+/* Tab Pane Context Menu Styling */
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button .context-menu {
+    -fx-background-color: #2d2d2d; /* Match menu bar background */
+    -fx-border-color: #3c3c3c;    /* Border for definition */
+    -fx-border-radius: 10px;       /* Rounded corners for consistency */
+    -fx-background-radius: 10px;
+    -fx-padding: 5px;             /* Padding inside the menu */
+}
+
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button {
+    -fx-background-color: #2d2d2d; /* Transparent default */
+}
+
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button .arrow {
+    -fx-background-color: #838383; /* Transparent default */
+}
+
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button:hover {
+    -fx-background-color: #3c3c3c; /* Transparent default */
+}
+
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button .context-menu .radio-menu-item {
+    -fx-background-color: transparent; /* Transparent default */
+    -fx-text-fill: #d4d4d4;            /* Light gray text for consistency */
+    -fx-padding: 5 10;                 /* Match other menu padding */
+    -fx-border-radius: 3px;            /* Rounded corners for hover effect */
+}
+
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button .context-menu .radio-menu-item:hover {
+    -fx-background-color: #384f98;    /* Darker hover effect */
+    -fx-background-radius: 5px;
+}
+
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button .context-menu .radio-menu-item .label {
+    -fx-font-size: 14px;               /* Standard font size */
+    -fx-font-family: "Rubik Regular";  /* Consistent font family */
+    -fx-font-weight: normal;           /* Standard text weight */
+}
+
+.tab-pane > .tab-header-area > .control-buttons-tab > .container > .tab-down-button .context-menu .radio-menu-item .left-container .radio {
+    -fx-background-color: transparent; /* Match selection accent color */
+    -fx-border-radius: 50%;        /* Circular checkmark */
+    -fx-min-width: 0px;           /* Set checkmark size */
+    -fx-min-height: 0px;
+    -fx-border-color: transparent;     /* Slightly darker border */
+}
+
+
+
 .tab-pane .tab-content-area {
     -fx-background-color: #2b2b2b; /* Match CodeArea background */
 }

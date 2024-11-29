@@ -85,15 +85,16 @@ public class CoreController {
         newFileItem.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
         newFileItem.setOnAction(e -> createNewFile());
 
-        // Ctrl+O: Open File
-        MenuItem openItem = new MenuItem("Open");
-        openItem.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.CONTROL_DOWN));
-        openItem.setOnAction(e -> openFile());
+        // Ctrl+O: Open Project
+        MenuItem openItem = new MenuItem("Open Project");
+        openItem.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.SHORTCUT_DOWN));
+        openItem.setOnAction(e -> openProject());
 
         // Ctrl+S: Save File
         MenuItem saveItem = new MenuItem("Save");
         saveItem.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
         saveItem.setOnAction(e -> saveFile());
+
     }
 
     private void setupProjectExplorer() {

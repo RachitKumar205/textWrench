@@ -32,7 +32,7 @@
             <menus>
                 <Menu text="File">
                     <items>
-                        <MenuItem text="New Tab" onAction="#createNewFile"/>
+                        <MenuItem text="New File" onAction="#createNewFile"/>
                         <MenuItem text="Open Project" onAction="#openProject"/>
                         <MenuItem text="Close Project" onAction="#closeProject"/>
                         <SeparatorMenuItem/>
