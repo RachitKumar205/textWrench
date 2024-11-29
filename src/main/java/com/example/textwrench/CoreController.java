@@ -181,13 +181,16 @@ public class CoreController {
     public void openProject() {
         Stage stage = (Stage) projectExplorer.getScene().getWindow();
         projectManagementService.openProject(stage);
-        isProjectOpen.set(true);
 
-        // Close the default tab if present
-        if (!tabPane.getTabs().isEmpty()) {
-            Tab defaultTab = tabPane.getTabs().getFirst();
-            if ("Untitled".equals(defaultTab.getText())) { // Check if the tab is the default one
-                tabPane.getTabs().remove(defaultTab);
+        if (projectManagementService.getCurrentProject() != null) {
+            isProjectOpen.set(true);
+
+            // Close the default tab if present
+            if (!tabPane.getTabs().isEmpty()) {
+                Tab defaultTab = tabPane.getTabs().get(0);
+                if ("Untitled".equals(defaultTab.getText())) { // Check if the tab is the default one
+                    tabPane.getTabs().remove(defaultTab);
+                }
             }
         }
     }
