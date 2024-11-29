@@ -118,6 +118,15 @@ public class ProjectItem {
         }
     }
 
+    public Node determineDisclosureIcon() {
+        if (isDirectory) {
+            // Use Ikonli for the disclosure icon (e.g., chevron)
+            return createIcon(Material.CHEVRON_LEFT, "#666666", 16);  // Example chevron down icon
+        }
+        return null;  // No disclosure icon for files
+    }
+
+
     public void addChild(ProjectItem child) {
         children.add(child);
     }

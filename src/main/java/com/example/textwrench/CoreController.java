@@ -6,7 +6,10 @@ import com.example.textwrench.coremodules.ProjectManagementService;
 import com.example.textwrench.coremodules.TabManagementService;
 import com.example.textwrench.coremodules.UIUtilityService;
 import com.example.textwrench.coremodules.model.ProjectItem;
+import com.example.textwrench.ui.CustomTreeCell;
 import javafx.application.Platform;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -32,8 +35,16 @@ public class CoreController {
     @FXML
     private TreeView<ProjectItem> projectExplorer;
 
+    @FXML
+    private Button openProjectButton;
+
+    @FXML
+    private Label projectExplorerLabel;
+
     private ExecutorService executor;
     private Map<String, ProjectItem.IconConfig> extensionToIconMap;
+
+    private BooleanProperty isProjectOpen = new SimpleBooleanProperty(false);
 
     // Service classes
     private TabManagementService tabManagementService;
@@ -58,8 +69,14 @@ public class CoreController {
         menuBar.useSystemMenuBarProperty().set(true);
         setupProjectExplorer();
 
+        openProjectButton.visibleProperty().bind(isProjectOpen.not());
+
         // Create initial tab
         createNewFile();
+    }
+
+    public BooleanProperty isProjectOpenProperty() {
+        return isProjectOpen;
     }
 
     private void setupKeyboardShortcuts() {
@@ -146,11 +163,21 @@ public class CoreController {
     public void openProject() {
         Stage stage = (Stage) projectExplorer.getScene().getWindow();
         projectManagementService.openProject(stage);
+        isProjectOpen.set(true);
+
+        // Close the default tab if present
+        if (!tabPane.getTabs().isEmpty()) {
+            Tab defaultTab = tabPane.getTabs().getFirst();
+            if ("Untitled".equals(defaultTab.getText())) { // Check if the tab is the default one
+                tabPane.getTabs().remove(defaultTab);
+            }
+        }
     }
 
     @FXML
     public void closeProject() {
         projectManagementService.closeProject();
+        isProjectOpen.set(false);
     }
 
     @FXML

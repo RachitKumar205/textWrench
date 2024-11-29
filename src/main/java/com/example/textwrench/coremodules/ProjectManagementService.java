@@ -39,7 +39,7 @@ public class ProjectManagementService {
 
         if (selectedDirectory != null) {
             // Load project structure
-            currentProject = loadProject(selectedDirectory);
+            this.currentProject = loadProject(selectedDirectory);
 
             // Create root tree item
             TreeItem<ProjectItem> rootItem = new TreeItem<>(currentProject);
@@ -74,7 +74,7 @@ public class ProjectManagementService {
 
             // Clear the project explorer
             projectExplorer.setRoot(null);
-            currentProject = null;
+            this.currentProject = null;
 
             // Create a new empty tab
             tabPane.getTabs().add(tabManagementService.createNewTab("Untitled", null));

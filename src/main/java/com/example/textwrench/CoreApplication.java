@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -79,6 +80,7 @@ public class CoreApplication extends Application {
 
         // App name label
         Label appNameLabel = new Label("TextWrench");
+        appNameLabel.getStyleClass().add("titlebar-label");  // CSS class for styling
         appNameLabel.getStyleClass().add("app-title");  // CSS class for styling
 
         // Optional menu buttons (example)
@@ -121,8 +123,7 @@ public class CoreApplication extends Application {
                     createMacOSStyleButton(FontIcon.of(BootstrapIcons.CIRCLE_FILL, 12, Color.web("#fa5e57")), () -> Platform.exit()),
                     createMacOSStyleButton(FontIcon.of(BootstrapIcons.CIRCLE_FILL, 12, Color.web("#fabc2f")), () -> stage.setIconified(true)),
                     createMacOSStyleButton(FontIcon.of(BootstrapIcons.CIRCLE_FILL, 12, Color.web("#28c840")), () -> {
-                        stage.setMaximized(!stage.isMaximized());
-                        isMaximized = stage.isMaximized();
+                        stage.setFullScreen(!stage.isFullScreen());
                     })
             );
         } else {

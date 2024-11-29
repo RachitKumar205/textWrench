@@ -1,11 +1,26 @@
 /* styles.css */
 
+@font-face {
+    font-family: "Rubik Medium";
+    src: url("../../../fonts/Rubik-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Rubik Regular";
+    src: url("../../../fonts/Rubik-Regular.ttf");
+}
+
 /* Root styling */
 .root {
     -fx-background-color: #1e1e1e; /* Dark gray background */
     -fx-text-base-color: #d4d4d4; /* Light gray text */
     -fx-background-radius: 10px;  /* Rounded corners */
     -fx-padding: 1px;            /* Optional padding inside */
+    -fx-font-family: "Rubik Regular";
+}
+
+.titlebar-label {
+    -fx-font-family: "Rubik Regular";
 }
 
 /* Menu Bar */
@@ -95,11 +110,12 @@
     -fx-border-color: #3c3c3c;
     -fx-border-width: 0 1px 0 0;
     -fx-background-radius: 0 0 10 10;
+    -fx-font-family: "Rubik Regular";
 }
 
 .project-explorer-header {
     -fx-background-color: #313131; /* Header background */
-    -fx-padding: 5px;
+    -fx-padding: 5 5 5 5px;
     -fx-border-color: #3c3c3c;
     -fx-border-width: 0 0 1px 0;
 }
@@ -150,6 +166,7 @@
 #projectExplorer {
     -fx-background-radius: 0 0 0 10;
     -fx-padding: 5 10 0 10;
+    -fx-font-size: 15px;
 }
 
 .default {
@@ -282,4 +299,27 @@
 
 .app-title:hover {
     -fx-text-fill: lightgray;
+}
+
+.tree-cell > .tree-disclosure-node > .arrow  {
+    -fx-background-color: #838383;
+    -fx-end-margin: 10px;
+}
+
+.tree-cell .disclosure-node {
+    -fx-padding: 0 0 0 100px; /* 10 pixels left padding */
+}
+
+.tree-cell:expanded > .tree-disclosure-node > .arrow {
+    -fx-background-color: #838383;
+}
+
+#openProjectButton{
+    -fx-font-size: 14px;
+    -fx-start-margin: 0;
+}
+
+#projectExplorerLabel {
+    -fx-font-size: 16px;
+    -fx-start-margin: 6;
 }
