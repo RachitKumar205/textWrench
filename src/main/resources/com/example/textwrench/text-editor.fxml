@@ -32,14 +32,14 @@
             <menus>
                 <Menu text="File">
                     <items>
-                        <MenuItem text="New File" onAction="#createNewFile"/>
-                        <MenuItem text="Open Project" onAction="#openProject"/>
-                        <MenuItem text="Close Project" onAction="#closeProject"/>
+                        <MenuItem fx:id="newFileItem" text="New File" onAction="#createNewFile"/>
+                        <MenuItem fx:id="openProjectItem" text="Open Project" onAction="#openProject"/>
+                        <MenuItem fx:id="closeProjectItem" text="Close Project" onAction="#closeProject"/>
                         <SeparatorMenuItem/>
-                        <MenuItem text="Open" onAction="#openFile"/>
-                        <MenuItem text="Save" onAction="#saveFile"/>
+                        <MenuItem fx:id="openFileItem" text="Open" onAction="#openFile"/>
+                        <MenuItem fx:id="saveFileItem" text="Save" onAction="#saveFile"/>
                         <SeparatorMenuItem/>
-                        <MenuItem text="Exit" onAction="#handleExit"/>
+                        <MenuItem fx:id="exitItem" text="Exit" onAction="#handleExit"/>
                     </items>
                 </Menu>
                 <!-- Other menus -->

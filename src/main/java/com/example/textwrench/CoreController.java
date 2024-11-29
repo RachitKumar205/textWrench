@@ -39,6 +39,24 @@ public class CoreController {
     private Button openProjectButton;
 
     @FXML
+    private MenuItem newFileItem;
+
+    @FXML
+    private MenuItem openProjectItem;
+
+    @FXML
+    private MenuItem closeProjectItem;
+
+    @FXML
+    private MenuItem openFileItem;
+
+    @FXML
+    private MenuItem saveFileItem;
+
+    @FXML
+    private MenuItem exitItem;
+
+    @FXML
     private Label projectExplorerLabel;
 
     private ExecutorService executor;
@@ -81,20 +99,19 @@ public class CoreController {
 
     private void setupKeyboardShortcuts() {
         // Ctrl+N: New File
-        MenuItem newFileItem = new MenuItem("New");
         newFileItem.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
-        newFileItem.setOnAction(e -> createNewFile());
 
         // Ctrl+O: Open Project
-        MenuItem openItem = new MenuItem("Open Project");
-        openItem.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.SHORTCUT_DOWN));
-        openItem.setOnAction(e -> openProject());
+        openProjectItem.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.SHORTCUT_DOWN));
 
         // Ctrl+S: Save File
-        MenuItem saveItem = new MenuItem("Save");
-        saveItem.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
-        saveItem.setOnAction(e -> saveFile());
+        saveFileItem.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
 
+        // Ctrl+W: Close Project
+        closeProjectItem.setAccelerator(new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN));
+
+        // Ctrl+Q: Exit
+        exitItem.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
     }
 
     private void setupProjectExplorer() {
