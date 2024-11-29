@@ -355,3 +355,31 @@
     -fx-font-size: 16px;
     -fx-start-margin: 6;
 }
+
+#leftTabPane {
+    -fx-pref-width: 40px;
+}
+
+/* Tab Pane Styling */
+#leftTabPane .tab-pane {
+    -fx-background-color: #2b2b2b; /* Match CodeArea background */
+    -fx-padding: 0px;
+}
+
+#leftTabPane .tab-header-area .tab-header-background {
+    -fx-background-color: #1e1e1e; /* Similar to menu bar */
+}
+
+#leftTabPane .tab {
+    -fx-background-color: #1e1e1e;
+    -fx-padding: 2 10 2 10;
+    -fx-background-radius: 5;
+    -fx-font-size: 14px;
+}
+
+#leftTabPane .tab:selected {
+    -fx-background-color: #3c3c3c;
+    -fx-padding: 2 10 2 10;
+    -fx-background-radius: 5;
+    -fx-font-size: 14px;
+}

@@ -11,12 +11,15 @@ import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -59,6 +62,12 @@ public class CoreController {
     @FXML
     private Label projectExplorerLabel;
 
+    @FXML
+    private TabPane leftTabPane;
+
+    @FXML
+    private SplitPane parentSplitPane;
+
     private ExecutorService executor;
     private Map<String, ProjectItem.IconConfig> extensionToIconMap;
 
@@ -89,6 +98,12 @@ public class CoreController {
 
         openProjectButton.visibleProperty().bind(isProjectOpen.not());
 
+        // Store the original content of the tab
+        VBox originalContent = (VBox) leftTabPane.getTabs().get(0).getContent();
+
+        // Setup left tab pane
+        setupLeftTabPane();
+
         // Create initial tab
         createNewFile();
     }
@@ -113,6 +128,65 @@ public class CoreController {
         // Ctrl+Q: Exit
         exitItem.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
     }
+
+    // Store content for each tab to support dynamic restoration
+    private Map<Tab, Node> tabContentMap = new HashMap<>();
+    private Tab activeTab = null; // Store the currently active tab
+
+    // Initialize tab management
+    private void setupLeftTabPane() {
+        // Populate initial content map
+        for (Tab tab : leftTabPane.getTabs()) {
+            tabContentMap.put(tab, tab.getContent());
+        }
+
+        // Minimum width to show tab headers
+        leftTabPane.setMinWidth(35);
+
+        // Add sophisticated tab toggle listener
+        leftTabPane.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 1) {
+                Tab selectedTab = leftTabPane.getSelectionModel().getSelectedItem();
+                if (selectedTab != null) {
+                    toggleTabContent(selectedTab);
+                }
+            }
+        });
+    }
+
+    private void toggleTabContent(Tab selectedTab) {
+        // If the selected tab is the same as the active one, toggle its content visibility
+        if (selectedTab == activeTab) {
+            // Check if tab content is currently visible
+            boolean isContentVisible = selectedTab.getContent() != null;
+
+            if (isContentVisible) {
+                // Hide content while preserving original
+                selectedTab.setContent(null);
+                parentSplitPane.setDividerPositions(0);
+            } else {
+                // Restore original content
+                Node originalContent = tabContentMap.get(selectedTab);
+                selectedTab.setContent(originalContent);
+                parentSplitPane.setDividerPositions(0.25);
+            }
+        } else {
+            // If a different tab is selected, hide the previous active tab's content (if any)
+            if (activeTab != null) {
+                // Hide content of the previous active tab
+                activeTab.setContent(null);
+            }
+
+            // Show content for the new selected tab
+            Node originalContent = tabContentMap.get(selectedTab);
+            selectedTab.setContent(originalContent);
+            parentSplitPane.setDividerPositions(0.20);
+
+            // Update the active tab
+            activeTab = selectedTab;
+        }
+    }
+
 
     private void setupProjectExplorer() {
         projectExplorer.setCellFactory(param -> new TreeCell<>() {

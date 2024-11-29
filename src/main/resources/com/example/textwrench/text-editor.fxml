@@ -3,27 +3,37 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane xmlns:fx="http://javafx.com/fxml"
+<SplitPane fx:id="parentSplitPane" xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.example.textwrench.CoreController"
            stylesheets="@styles.css"
            dividerPositions="0.15">
 
-    <!-- Project Explorer Pane -->
-    <VBox styleClass="project-explorer">
-        <!-- Adjusted Header with Label and Button -->
-        <HBox styleClass="project-explorer-header" spacing="10" alignment="CENTER_LEFT">
-            <!-- Label stays left-aligned -->
-            <Label fx:id="projectExplorerLabel" text="Project Explorer" />
+    <!-- Vertical TabPane for Project Explorer -->
+    <TabPane side="LEFT" styleClass="left-tab-pane" fx:id="leftTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+        <tabs>
+            <Tab  text="Explorer">
+                <VBox styleClass="project-explorer">
+                    <!-- Adjusted Header with Label and Button -->
+                    <HBox styleClass="project-explorer-header" spacing="10" alignment="CENTER_LEFT">
+                        <!-- Label stays left-aligned -->
+                        <Label fx:id="projectExplorerLabel" text="Project Explorer" />
 
-            <!-- Spacer to center the button -->
-            <Region HBox.hgrow="ALWAYS" />
+                        <!-- Spacer to center the button -->
+                        <Region HBox.hgrow="ALWAYS" />
 
-            <!-- Button centered in the available space -->
-            <Button fx:id="openProjectButton" text="Open Project  ⌘O" onAction="#openProject" />
-        </HBox>
-        <TreeView fx:id="projectExplorer" VBox.vgrow="ALWAYS">
-        </TreeView>
-    </VBox>
+                        <!-- Button centered in the available space -->
+                        <Button fx:id="openProjectButton" text="Open Project  ⌘O" onAction="#openProject" />
+                    </HBox>
+                    <TreeView fx:id="projectExplorer" VBox.vgrow="ALWAYS">
+                    </TreeView>
+                </VBox>
+            </Tab>
+            <Tab  text="Git">
+                <VBox>
+                </VBox>
+            </Tab>
+        </tabs>
+    </TabPane>
 
     <!-- Right Pane with Menu, Tabs, and Status Bar -->
     <VBox styleClass="rounded-vbox">
