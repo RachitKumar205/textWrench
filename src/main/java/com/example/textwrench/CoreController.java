@@ -85,6 +85,7 @@ public class CoreController {
         executor = Executors.newSingleThreadExecutor();
         extensionToIconMap = IconConfigLoader.loadIconConfiguration();
 
+
         // Initialize service classes
         tabManagementService = new TabManagementService(tabPane);
         fileManagementService = new FileManagementService(tabPane);
@@ -97,9 +98,6 @@ public class CoreController {
         setupProjectExplorer();
 
         openProjectButton.visibleProperty().bind(isProjectOpen.not());
-
-        // Store the original content of the tab
-        VBox originalContent = (VBox) leftTabPane.getTabs().get(0).getContent();
 
         // Setup left tab pane
         setupLeftTabPane();
@@ -132,6 +130,7 @@ public class CoreController {
     // Store content for each tab to support dynamic restoration
     private Map<Tab, Node> tabContentMap = new HashMap<>();
     private Tab activeTab = null; // Store the currently active tab
+    private double previousDividerPosition = 0.20;
 
     // Initialize tab management
     private void setupLeftTabPane() {
@@ -139,6 +138,8 @@ public class CoreController {
         for (Tab tab : leftTabPane.getTabs()) {
             tabContentMap.put(tab, tab.getContent());
         }
+
+        activeTab = leftTabPane.getTabs().getFirst();
 
         // Minimum width to show tab headers
         leftTabPane.setMinWidth(35);
@@ -161,6 +162,8 @@ public class CoreController {
             boolean isContentVisible = selectedTab.getContent() != null;
 
             if (isContentVisible) {
+
+                previousDividerPosition = parentSplitPane.getDividerPositions()[0];
                 // Hide content while preserving original
                 selectedTab.setContent(null);
                 parentSplitPane.setDividerPositions(0);
@@ -168,7 +171,7 @@ public class CoreController {
                 // Restore original content
                 Node originalContent = tabContentMap.get(selectedTab);
                 selectedTab.setContent(originalContent);
-                parentSplitPane.setDividerPositions(0.25);
+                parentSplitPane.setDividerPositions(previousDividerPosition);
             }
         } else {
             // If a different tab is selected, hide the previous active tab's content (if any)
@@ -180,7 +183,7 @@ public class CoreController {
             // Show content for the new selected tab
             Node originalContent = tabContentMap.get(selectedTab);
             selectedTab.setContent(originalContent);
-            parentSplitPane.setDividerPositions(0.20);
+            parentSplitPane.setDividerPositions(previousDividerPosition);
 
             // Update the active tab
             activeTab = selectedTab;

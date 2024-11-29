@@ -6,7 +6,7 @@
 <SplitPane fx:id="parentSplitPane" xmlns:fx="http://javafx.com/fxml"
            fx:controller="com.example.textwrench.CoreController"
            stylesheets="@styles.css"
-           dividerPositions="0.15">
+           dividerPositions="0.25">
 
     <!-- Vertical TabPane for Project Explorer -->
     <TabPane side="LEFT" styleClass="left-tab-pane" fx:id="leftTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
