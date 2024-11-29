@@ -146,11 +146,9 @@ public class CoreController {
 
         // Add sophisticated tab toggle listener
         leftTabPane.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 1) {
-                Tab selectedTab = leftTabPane.getSelectionModel().getSelectedItem();
-                if (selectedTab != null) {
-                    toggleTabContent(selectedTab);
-                }
+            Tab selectedTab = leftTabPane.getSelectionModel().getSelectedItem();
+            if (selectedTab != null) {
+                toggleTabContent(selectedTab);
             }
         });
     }
