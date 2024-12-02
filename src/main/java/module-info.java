@@ -16,9 +16,12 @@ module com.example.textwrench {
     requires org.kordamp.ikonli.devicons;
     requires org.kordamp.ikonli.core;
     requires org.fxmisc.flowless;
+    requires java.logging;
 
     opens com.example.textwrench to javafx.fxml;
     exports com.example.textwrench;
     exports com.example.textwrench.lsp;
     opens com.example.textwrench.lsp to javafx.fxml;
+
+    uses com.example.textwrench.coremodules.plugin.TextWrenchPlugin;
 }

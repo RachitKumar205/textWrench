@@ -6,6 +6,8 @@ import com.example.textwrench.coremodules.ProjectManagementService;
 import com.example.textwrench.coremodules.TabManagementService;
 import com.example.textwrench.coremodules.UIUtilityService;
 import com.example.textwrench.coremodules.model.ProjectItem;
+import com.example.textwrench.coremodules.plugin.PluginContext;
+import com.example.textwrench.coremodules.plugin.PluginManager;
 import com.example.textwrench.ui.CustomTreeCell;
 import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
@@ -99,6 +101,9 @@ public class CoreController {
 
         openProjectButton.visibleProperty().bind(isProjectOpen.not());
 
+        PluginManager pluginManager = PluginManager.getInstance();
+        pluginManager.loadPlugins(createPluginContext());
+
         // Setup left tab pane
         setupLeftTabPane();
 
@@ -108,6 +113,54 @@ public class CoreController {
 
     public BooleanProperty isProjectOpenProperty() {
         return isProjectOpen;
+    }
+
+    private PluginContext createPluginContext() {
+        return new PluginContext() {
+            @Override
+            public Tab getCurrentTab() {
+                return tabPane.getSelectionModel().getSelectedItem();
+            }
+
+            @Override
+            public void addMenuItem(String menuTitle, MenuItem menuItem) {
+                Menu menu = findOrCreateMenu(menuTitle);
+                menu.getItems().add(menuItem);
+            }
+
+            @Override
+            public Stage getPrimaryStage() {
+                return (Stage) tabPane.getScene().getWindow();
+            }
+
+            @Override
+            public void showNotification(String message) {
+                statusBar.setText(message);
+            }
+
+            @Override
+            public String getCurrentTabContent() {
+                Tab currentTab = getCurrentTab();
+                return currentTab.getText();
+            }
+
+            @Override
+            public void setCurrentTabContent(String content) {
+                // TODO: Implement
+            }
+        };
+    }
+
+    private Menu findOrCreateMenu(String menuTitle){
+        for (Menu menu : menuBar.getMenus()) {
+            if (menu.getText().equals(menuTitle)){
+                return menu;
+            }
+        }
+
+        Menu newMenu = new Menu(menuTitle);
+        menuBar.getMenus().add(newMenu);
+        return newMenu;
     }
 
     private void setupKeyboardShortcuts() {
