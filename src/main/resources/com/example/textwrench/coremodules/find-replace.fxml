@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.textwrench.coremodules.FindReplaceController"
+      fx:id="findReplacePanel"
+      styleClass="find-replace-panel"
+      stylesheets="@find-replace.css"
+      spacing="10"
+      alignment="CENTER_LEFT"
+      maxHeight="100"
+      prefHeight="100">
+
+    <!-- Find Bar -->
+    <HBox spacing="10" alignment="CENTER_LEFT" prefWidth="500">
+        <TextField fx:id="findField"
+                   styleClass="find-replace-input"
+                   promptText="Find"
+                   HBox.hgrow="ALWAYS"
+                   prefWidth="500"
+                   maxWidth="600"/>
+
+        <Button fx:id="findPreviousButton" text="Previous" onAction="#handleFindPrevious" styleClass="find-replace-button"/>
+        <Button fx:id="findNextButton" text="Next" onAction="#handleFindNext" styleClass="find-replace-button"/>
+
+        <!-- Spacer to push the Close button to the right -->
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button fx:id="closeButton" onAction="#handleClose" styleClass="close-button" minWidth="30" maxWidth="30" minHeight="30" maxHeight="30">
+            <graphic>
+            <FontIcon iconLiteral="bi-x" iconSize="28" iconColor="#d4d4d4"/>
+            </graphic>
+        </Button>
+    </HBox>
+
+    <!-- Replace Bar -->
+    <HBox spacing="10" alignment="CENTER_LEFT" prefWidth="500">
+        <TextField fx:id="replaceField"
+                   styleClass="find-replace-input"
+                   promptText="Replace"
+                   HBox.hgrow="ALWAYS"
+                   prefWidth="500"
+                   maxWidth="600"/>
+
+        <Button fx:id="replaceButton" text="Replace" onAction="#handleReplace" styleClass="find-replace-button"/>
+        <Button fx:id="replaceAllButton" text="Replace All" onAction="#handleReplaceAll" styleClass="find-replace-button"/>
+    </HBox>
+
+    <!-- Status Label -->
+    <Label fx:id="statusLabel" text="Ready"
+           styleClass="status-label"
+           prefWidth="Infinity"
+           alignment="CENTER_LEFT"/>
+</VBox>

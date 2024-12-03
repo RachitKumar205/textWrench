@@ -103,6 +103,10 @@ public class TabManagementService {
         }
     }
 
+    public TabPane getTabPane() {
+        return tabPane;
+    }
+
     public CodeArea getCurrentCodeArea() {
         Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
         if (currentTab != null) {

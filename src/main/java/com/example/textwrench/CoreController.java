@@ -1,10 +1,7 @@
 package com.example.textwrench;
 
 import com.example.textwrench.IconLoader.IconConfigLoader;
-import com.example.textwrench.coremodules.FileManagementService;
-import com.example.textwrench.coremodules.ProjectManagementService;
-import com.example.textwrench.coremodules.TabManagementService;
-import com.example.textwrench.coremodules.UIUtilityService;
+import com.example.textwrench.coremodules.*;
 import com.example.textwrench.coremodules.model.ProjectItem;
 import com.example.textwrench.coremodules.plugin.PluginContext;
 import com.example.textwrench.coremodules.plugin.PluginManager;
@@ -15,6 +12,8 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -62,6 +61,9 @@ public class CoreController {
     private MenuItem openFileItem;
 
     @FXML
+    private MenuItem handleFindReplace;
+
+    @FXML
     private MenuItem saveFileItem;
 
     @FXML
@@ -69,6 +71,9 @@ public class CoreController {
 
     @FXML
     private Label projectExplorerLabel;
+
+    @FXML
+    private VBox findReplaceContainer;
 
     @FXML
     private TabPane leftTabPane;
@@ -204,6 +209,8 @@ public class CoreController {
 
         // Ctrl+Q: Exit
         exitItem.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
+
+        handleFindReplace.setAccelerator(new KeyCodeCombination(KeyCode.F, KeyCombination.SHORTCUT_DOWN));
     }
 
     // Store content for each tab to support dynamic restoration
@@ -267,6 +274,28 @@ public class CoreController {
         }
     }
 
+    @FXML
+    private void handleFindReplace() {
+        try {
+            // Load the Find/Replace FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("coremodules/find-replace.fxml"));
+
+            // Load the view
+            Parent findReplaceView = loader.load();
+
+            // Get the controller instance and set the tabManagementService
+            FindReplaceController findReplaceController = loader.getController();
+            findReplaceController.setTabManagementService(tabManagementService);
+
+            // Add the Find/Replace view to the container
+            findReplaceContainer.getChildren().clear();
+            findReplaceContainer.getChildren().add(findReplaceView);
+        } catch (IOException e) {
+            // Handle any loading errors
+            statusBar.setText("Error opening Find/Replace: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
 
     private void setupProjectExplorer() {
         projectExplorer.setCellFactory(param -> new TreeCell<>() {

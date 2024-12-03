@@ -52,9 +52,17 @@
                         <MenuItem fx:id="exitItem" text="Exit" onAction="#handleExit"/>
                     </items>
                 </Menu>
+                <Menu text="Edit">
+                    <items>
+                        <MenuItem fx:id="handleFindReplace" text="Find/Replace" onAction="#handleFindReplace" />
+                    </items>
+                </Menu>
                 <!-- Other menus -->
             </menus>
         </MenuBar>
+
+        <!-- Find/Replace UI Container -->
+        <VBox fx:id="findReplaceContainer" spacing="10" alignment="CENTER"/>
 
         <!-- Tabbed Interface -->
         <TabPane tabClosingPolicy="ALL_TABS" fx:id="tabPane" VBox.vgrow="ALWAYS" styleClass="text-area">

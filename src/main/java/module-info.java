@@ -22,6 +22,7 @@ module com.example.textwrench {
     exports com.example.textwrench;
     exports com.example.textwrench.lsp;
     opens com.example.textwrench.lsp to javafx.fxml;
+    opens com.example.textwrench.coremodules to javafx.fxml;
 
     uses com.example.textwrench.coremodules.plugin.TextWrenchPlugin;
 }

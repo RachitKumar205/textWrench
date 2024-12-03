@@ -1,0 +1,102 @@
+/* Find and Replace Styling */
+
+/* Root container for the Find and Replace dialog */
+.find-replace-panel {
+    -fx-background-color: #1e1e1e; /* Dark gray background */
+    -fx-text-base-color: #d4d4d4; /* Light gray text */
+    -fx-padding: 10px;            /* Padding inside */
+    -fx-font-family: "Rubik Regular";
+}
+
+/* Title styling for Find and Replace */
+.find-replace-title {
+    -fx-font-family: "Rubik Regular";
+    -fx-font-size: 18px;
+    -fx-text-fill: #d4d4d4; /* Light gray text */
+}
+
+.status-label {
+    -fx-font-family: "Rubik Regular";
+    -fx-text-fill: #d4d4d4; /* Light gray text */
+}
+
+/* Label styling for Find and Replace */
+.find-replace-label {
+    -fx-font-family: "Rubik Regular";
+    -fx-text-fill: #d4d4d4; /* Light gray text */
+}
+
+/* Find and Replace input fields */
+.find-replace-input {
+    -fx-background-color: #2b2b2b; /* Dark gray background for inputs */
+    -fx-text-fill: #d4d4d4; /* Light gray text */
+    -fx-font-size: 14px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-border-color: #3c3c3c; /* Darker border for inputs */
+}
+
+/* Focused input field (active search) */
+.find-replace-input:focused {
+    -fx-border-color: #569cd6; /* Highlighted border for focus */
+    -fx-background-color: #333333; /* Slightly lighter background when focused */
+}
+
+/* Find and Replace buttons */
+.find-replace-button {
+    -fx-background-color: #3a3d41; /* Dark button background */
+    -fx-text-fill: #dcdcdc; /* Light gray text */
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 10px;
+    -fx-font-size: 14px;
+}
+
+/* Close button */
+.close-button {
+    -fx-background-color: #1e1e1e; /* Dark button background */
+    -fx-text-fill: #dcdcdc; /* Light gray text */
+    -fx-border-radius: 5px;
+    -fx-font-size: 14px;
+}
+
+.close-button:hover {
+    -fx-background-color: #3c3c3c; /* Lighter button background on hover */
+}
+
+.find-replace-button:hover {
+    -fx-background-color: #515459; /* Lighter button background on hover */
+}
+
+/* Button when it's pressed */
+.find-replace-button:pressed {
+    -fx-background-color: #444444;
+}
+
+/* Match highlight for Find result */
+.find-replace-highlight {
+    -fx-background-color: #384f98; /* Dark blue highlight for matches */
+    -fx-text-fill: #ffffff; /* White text in highlighted results */
+}
+
+/* Replace field */
+.find-replace-replace-input {
+    -fx-background-color: #2b2b2b; /* Dark gray background */
+    -fx-text-fill: #d4d4d4; /* Light gray text */
+    -fx-font-size: 14px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+    -fx-border-color: #3c3c3c; /* Dark border */
+}
+
+/* Replace button */
+.find-replace-replace-button {
+    -fx-background-color: #3a3d41; /* Dark button background */
+    -fx-text-fill: #dcdcdc; /* Light gray text */
+    -fx-border-radius: 5px;
+    -fx-padding: 5px 10px;
+    -fx-font-size: 14px;
+}
+
+.find-replace-replace-button:hover {
+    -fx-background-color: #515459; /* Lighter button background on hover */
+}
