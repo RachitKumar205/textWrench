@@ -168,6 +168,12 @@ public class CoreController {
                     currentTab.setContent(content);
                 }
             }
+
+            @Override
+            public void addTab(Tab tab) {
+                tabPane.getTabs().add(tab);
+                tabPane.getSelectionModel().select(tab);
+            }
         };
     }
 

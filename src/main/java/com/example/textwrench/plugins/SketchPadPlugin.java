@@ -6,6 +6,7 @@ import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
@@ -46,6 +47,10 @@ public class SketchPadPlugin implements TextWrenchPlugin {
         canvas.addEventHandler(MouseEvent.MOUSE_PRESSED, this::onMousePressed);
         canvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, this::onMouseDragged);
 
+        MenuItem openSketchPadMenuItem = new MenuItem("New Sketch");
+        openSketchPadMenuItem.setOnAction(e -> openSketchPadInNewTab());
+        context.addMenuItem("Sketchpad", openSketchPadMenuItem);
+
 
         MenuItem saveMenuItem = new MenuItem("Save Sketch");
         saveMenuItem.setOnAction(e -> saveSketch());
@@ -54,11 +59,6 @@ public class SketchPadPlugin implements TextWrenchPlugin {
         MenuItem loadMenuItem = new MenuItem("Load Sketch");
         loadMenuItem.setOnAction(e -> loadSketch());
         context.addMenuItem("Sketchpad", loadMenuItem);
-
-        // Add menu item to open SketchPad in a new tab
-        MenuItem openSketchPadMenuItem = new MenuItem("New Sketch");
-        openSketchPadMenuItem.setOnAction(e -> openSketchPadInNewTab());
-        context.addMenuItem("Sketchpad", openSketchPadMenuItem);
     }
 
     private void onMousePressed(MouseEvent event) {
@@ -92,9 +92,39 @@ public class SketchPadPlugin implements TextWrenchPlugin {
     }
 
     private void openSketchPadInNewTab() {
+        // Create a new Canvas
+        Canvas newCanvas = new Canvas(800, 600);
+        GraphicsContext gc = newCanvas.getGraphicsContext2D();
+        gc.setFill(Color.WHITE);
+        gc.fillRect(0, 0, newCanvas.getWidth(), newCanvas.getHeight());
+
+        // Add mouse event handlers for drawing
+        newCanvas.addEventHandler(MouseEvent.MOUSE_PRESSED, event -> {
+            lastX = event.getX();
+            lastY = event.getY();
+        });
+        newCanvas.addEventHandler(MouseEvent.MOUSE_DRAGGED, event -> {
+            double x = event.getX();
+            double y = event.getY();
+            GraphicsContext canvasGc = newCanvas.getGraphicsContext2D();
+            canvasGc.setStroke(Color.BLACK);
+            canvasGc.setLineWidth(2);
+            canvasGc.strokeLine(lastX, lastY, x, y);
+            lastX = x;
+            lastY = y;
+        });
+
+        // Create a ScrollPane for the canvas
+        ScrollPane scrollPane = new ScrollPane(newCanvas);
+        scrollPane.setFitToWidth(true);
+        scrollPane.setFitToHeight(true);
+
+        // Create a new tab
         Tab newTab = new Tab("Sketch Pad");
-        newTab.setContent(getConfigurationPane());
-        context.setCurrentTabContent(newTab.getContent());
+        newTab.setContent(scrollPane);
+
+        // Add the new tab
+        context.addTab(newTab);
     }
 
     @Override

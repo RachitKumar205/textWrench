@@ -44,4 +44,10 @@ public interface PluginContext {
      * @param content New content for the tab
      */
     void setCurrentTabContent(Node content);
+
+    /**
+     * Create a new tab for the plugin
+     * @param tab Tab to create
+     */
+    void addTab(Tab tab);
 }

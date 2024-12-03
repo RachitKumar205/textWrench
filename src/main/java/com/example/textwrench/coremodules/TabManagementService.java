@@ -58,33 +58,41 @@ public class TabManagementService {
     }
 
     public boolean isTabContentSaved(Tab tab) {
-        VirtualizedScrollPane scrollPane = (VirtualizedScrollPane) tab.getContent();
-        CodeArea codeArea = (CodeArea) scrollPane.getContent();
-        File associatedFile = (File) tab.getUserData();
+        // Check if content is a VirtualizedScrollPane with CodeArea (existing logic)
+        if (tab.getContent() instanceof VirtualizedScrollPane) {
+            VirtualizedScrollPane scrollPane = (VirtualizedScrollPane) tab.getContent();
+            CodeArea codeArea = (CodeArea) scrollPane.getContent();
+            File associatedFile = (File) tab.getUserData();
 
-        // If the tab has no content, it can be closed
-        if (codeArea.getText().isEmpty()) return true;
+            if (codeArea.getText().isEmpty()) return true;
 
-        // If the tab has unsaved changes, prompt user
-        if (associatedFile == null || !codeArea.getText().equals(readFileContent(associatedFile))) {
-            Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmAlert.setTitle("Unsaved Changes");
-            confirmAlert.setHeaderText("Do you want to save changes to " + tab.getText() + "?");
-
-            ButtonType saveButton = new ButtonType("Save");
-            ButtonType discardButton = new ButtonType("Discard");
-            ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-            confirmAlert.getButtonTypes().setAll(saveButton, discardButton, cancelButton);
-
-            Optional<ButtonType> result = confirmAlert.showAndWait();
-
-            if (result.get() == saveButton) {
-                new FileManagementService(tabPane).saveFile();
-                return true;
-            } else return result.get() == discardButton;
+            if (associatedFile == null || !codeArea.getText().equals(readFileContent(associatedFile))) {
+                return handleUnsavedChanges(tab);
+            }
+            return true;
         }
+
+        // For other types of tabs (like SketchPad), always allow closing
         return true;
+    }
+
+    private boolean handleUnsavedChanges(Tab tab) {
+        Alert confirmAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmAlert.setTitle("Unsaved Changes");
+        confirmAlert.setHeaderText("Do you want to save changes to " + tab.getText() + "?");
+
+        ButtonType saveButton = new ButtonType("Save");
+        ButtonType discardButton = new ButtonType("Discard");
+        ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+        confirmAlert.getButtonTypes().setAll(saveButton, discardButton, cancelButton);
+
+        Optional<ButtonType> result = confirmAlert.showAndWait();
+
+        if (result.get() == saveButton) {
+            new FileManagementService(tabPane).saveFile();
+            return true;
+        } else return result.get() == discardButton;
     }
 
     private String readFileContent(File file) {
