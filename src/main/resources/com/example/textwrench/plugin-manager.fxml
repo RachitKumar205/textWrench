@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.textwrench.PluginManagerController"
+      styleClass="project-explorer"
+      stylesheets="@plugin-manager.css">
+
+    <!-- Header similar to Project Explorer -->
+    <HBox styleClass="project-explorer-header" spacing="10" alignment="CENTER_LEFT">
+        <Label text="Plugin Manager" styleClass="project-explorer-label"/>
+
+        <Region HBox.hgrow="ALWAYS" />
+
+        <Button text="Reload Plugins" onAction="#reloadPlugins" />
+    </HBox>
+
+    <!-- Scrollable list of plugins -->
+    <ScrollPane VBox.vgrow="ALWAYS" fitToWidth="true" styleClass="plugin-list-scroll">
+        <VBox fx:id="pluginContainer" spacing="5"/>
+    </ScrollPane>
+</VBox>

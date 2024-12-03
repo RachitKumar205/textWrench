@@ -1,0 +1,139 @@
+@font-face {
+    font-family: "Rubik Medium";
+    src: url("../../../fonts/Rubik-Medium.ttf");
+}
+
+@font-face {
+    font-family: "Rubik Regular";
+    src: url("../../../fonts/Rubik-Regular.ttf");
+}
+
+
+/* Plugin Manager Styles */
+.plugin-manager-root {
+    -fx-background-color: #252526;
+    -fx-font-family: "Rubik Regular";
+}
+
+#pluginContainer {
+    -fx-padding: 10;
+}
+
+.plugin-manager-title {
+    -fx-font-size: 16px;
+    -fx-text-fill: #dcdcdc;
+    -fx-padding: 10 0 10 0;
+    -fx-font-family: "Rubik Medium";
+}
+
+.plugin-card {
+    -fx-background-color: #1e1e1e;
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    -fx-padding: 10px;
+    -fx-border-color: #3c3c3c;
+    -fx-border-width: 1px;
+}
+
+.plugin-card-header {
+    -fx-font-size: 16px;
+    -fx-text-fill: #d4d4d4;
+    -fx-font-family: "Rubik Regular";
+    -fx-padding: 0 0 5 0;
+}
+
+.plugin-card-desc {
+    -fx-font-size: 14px;
+    -fx-text-fill: #d4d4d4;
+    -fx-font-family: "Rubik Regular";
+    -fx-padding: 0 0 5 0;
+}
+
+.plugin-card-id {
+    -fx-font-size: 12px;
+    -fx-text-fill: #7c7c7c;
+    -fx-font-family: "Rubik Regular";
+    -fx-padding: 0 0 5 0;
+}
+
+.plugin-card-status-enabled {
+    -fx-text-fill: #00ac24;
+    -fx-font-size: 12px;
+}
+
+.plugin-card-status-disabled {
+    -fx-text-fill: #e61616;
+    -fx-font-size: 12px;
+}
+
+.plugin-card-button {
+    -fx-background-color: #3a3d41;
+    -fx-text-fill: #dcdcdc;
+    -fx-background-radius: 3px;
+    -fx-padding: 5 10 5 10;
+}
+
+.plugin-card-button:hover {
+    -fx-background-color: #515459;
+}
+
+.plugin-list-scroll {
+    -fx-background-color: #252526;
+}
+
+.plugin-list-scroll .viewport {
+    -fx-background-color: #252526;
+}
+
+.plugin-list-scroll .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-pref-width: 10px;
+}
+
+.plugin-list-scroll .scroll-bar .thumb {
+    -fx-background-color: rgba(100, 100, 100, 0.5);
+    -fx-background-radius: 5em;
+}
+
+.plugin-list-scroll .scroll-bar .increment-button,
+.plugin-list-scroll .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.plugin-list-scroll .corner {
+    -fx-background-color: #252526;
+}
+
+/* New styles based on FXML */
+.project-explorer {
+    -fx-background-color: #2b2b2b;
+}
+
+.project-explorer-header {
+    -fx-background-color: #2C2C2C;
+    -fx-padding: 5px;
+    -fx-font-family: "Rubik Regular";
+}
+
+
+.project-explorer-header Label {
+    -fx-text-fill: white;
+    -fx-font-size: 16px;
+    -fx-font-family: "Rubik Regular";
+}
+
+.project-explorer-header Button {
+    -fx-font-size: 14px;
+    -fx-background-color: #3a3d41;
+    -fx-text-fill: #dcdcdc;
+    -fx-background-radius: 3px;
+    -fx-padding: 5 10 5 10;
+}
+
+.project-explorer-header Button:hover {
+    -fx-background-color: #515459;
+}
+
+.plugin-list-scroll VBox {
+    -fx-spacing: 5px;
+}

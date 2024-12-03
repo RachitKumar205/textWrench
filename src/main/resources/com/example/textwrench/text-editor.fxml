@@ -28,8 +28,8 @@
                     </TreeView>
                 </VBox>
             </Tab>
-            <Tab  text="Git">
-                <VBox>
+            <Tab  text="Plugin Manager">
+                <VBox fx:id="pluginManagerVBox">
                 </VBox>
             </Tab>
         </tabs>

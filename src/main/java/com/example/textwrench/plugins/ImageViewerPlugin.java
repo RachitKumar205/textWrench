@@ -6,25 +6,25 @@ import javafx.scene.Node;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 
-public class ExamplePlugin implements TextWrenchPlugin {
+public class ImageViewerPlugin implements TextWrenchPlugin {
     private boolean enabled = true;
     private PluginContext context;
 
-    public ExamplePlugin(){};
+    public ImageViewerPlugin(){};
 
     @Override
     public String getPluginId() {
-        return "example.textwrenchplugin";
+        return "imageviewer.textwrenchplugin";
     }
 
     @Override
     public String getPluginName() {
-        return "Example Plugin";
+        return "Image Viewer Plugin";
     }
 
     @Override
     public String getPluginDescription() {
-        return "Testing out plugin integration";
+        return "Plugin to common image formats (png/jpg/jpeg) in the editor";
     }
 
     @Override

@@ -1,6 +1,9 @@
 package com.example.textwrench.coremodules.plugin;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.logging.Level;
@@ -11,6 +14,8 @@ import java.util.jar.JarFile;
 public class PluginManager {
     private static final Logger LOGGER = Logger.getLogger(PluginManager.class.getName());
     private static PluginManager instance;
+    private static final String PROPERTIES_FILE = "src/main/resources/plugin-states.properties";
+    private Properties pluginStates = new Properties();
 
     private final List<TextWrenchPlugin> plugins = new ArrayList<>();
     private PluginContext pluginContext;
@@ -36,6 +41,22 @@ public class PluginManager {
             scanClasspathSelectively();
         } catch (Exception e) {
             LOGGER.log(Level.SEVERE, "Error loading plugins", e);
+        }
+    }
+
+    private void loadPluginStates() {
+        try (FileInputStream in = new FileInputStream(PROPERTIES_FILE)) {
+            pluginStates.load(in);
+        } catch (IOException e) {
+            LOGGER.log(Level.WARNING, "Could not load plugin states", e);
+        }
+    }
+
+    private void savePluginStates() {
+        try (FileOutputStream out = new FileOutputStream(PROPERTIES_FILE)) {
+            pluginStates.store(out, null);
+        } catch (IOException e) {
+            LOGGER.log(Level.WARNING, "Could not save plugin states", e);
         }
     }
 
@@ -158,30 +179,6 @@ public class PluginManager {
     }
 
     /**
-     * Scan a JAR file for plugin classes
-     * @param jarFile JAR file to scan
-     */
-    private void scanJarFile(File jarFile) {
-        try (JarFile jar = new JarFile(jarFile)) {
-            Enumeration<JarEntry> entries = jar.entries();
-
-            while (entries.hasMoreElements()) {
-                JarEntry entry = entries.nextElement();
-
-                if (entry.getName().endsWith(".class")) {
-                    String className = entry.getName()
-                            .replace("/", ".")
-                            .replace(".class", "");
-
-                    tryLoadPlugin(className);
-                }
-            }
-        } catch (Exception e) {
-            LOGGER.log(Level.WARNING, "Error scanning JAR file", e);
-        }
-    }
-
-    /**
      * Attempt to load and initialize a plugin class
      * @param className Fully qualified class name
      */
@@ -200,6 +197,10 @@ public class PluginManager {
                 // Initialize plugin
                 plugin.initialize(pluginContext);
 
+                String pluginId = plugin.getPluginId();
+                boolean enabled = Boolean.parseBoolean(pluginStates.getProperty(pluginId, "true"));
+                plugin.setEnabled(enabled);
+
                 // Add if enabled
                 if (plugin.isEnabled()) {
                     plugins.add(plugin);
@@ -211,6 +212,7 @@ public class PluginManager {
             LOGGER.log(Level.FINE, "Could not load plugin class: " + className, e);
         }
     }
+
 
     // Existing methods remain the same
     public List<TextWrenchPlugin> getPlugins() {
@@ -228,6 +230,8 @@ public class PluginManager {
         TextWrenchPlugin plugin = getPluginById(pluginId);
         if (plugin != null) {
             plugin.setEnabled(enabled);
+            pluginStates.setProperty(pluginId, Boolean.toString(enabled));
+            savePluginStates();
         }
     }
 }

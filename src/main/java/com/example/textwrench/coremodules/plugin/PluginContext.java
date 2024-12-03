@@ -1,4 +1,5 @@
 package com.example.textwrench.coremodules.plugin;
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
@@ -42,5 +43,5 @@ public interface PluginContext {
      * Set the content of the current active tab
      * @param content New content for the tab
      */
-    void setCurrentTabContent(String content);
+    void setCurrentTabContent(Node content);
 }

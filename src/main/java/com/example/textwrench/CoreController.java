@@ -13,16 +13,22 @@ import javafx.application.Platform;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -70,6 +76,9 @@ public class CoreController {
     @FXML
     private SplitPane parentSplitPane;
 
+    @FXML
+    private VBox pluginManagerVBox;
+
     private ExecutorService executor;
     private Map<String, ProjectItem.IconConfig> extensionToIconMap;
 
@@ -103,6 +112,14 @@ public class CoreController {
 
         PluginManager pluginManager = PluginManager.getInstance();
         pluginManager.loadPlugins(createPluginContext());
+        try {
+            VBox pluginManagerContent = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/com/example/textwrench/plugin-manager.fxml")));
+            VBox.setVgrow(pluginManagerContent, Priority.ALWAYS); // Ensure the VBox grows with the parent container
+            pluginManagerVBox.getChildren().add(pluginManagerContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         // Setup left tab pane
         setupLeftTabPane();
@@ -145,8 +162,11 @@ public class CoreController {
             }
 
             @Override
-            public void setCurrentTabContent(String content) {
-                // TODO: Implement
+            public void setCurrentTabContent(Node content) {
+                Tab currentTab = getCurrentTab();
+                if (currentTab != null) {
+                    currentTab.setContent(content);
+                }
             }
         };
     }
