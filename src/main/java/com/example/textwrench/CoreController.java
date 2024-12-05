@@ -23,6 +23,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import org.fxmisc.richtext.CodeArea;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -101,7 +102,6 @@ public class CoreController {
         executor = Executors.newSingleThreadExecutor();
         extensionToIconMap = IconConfigLoader.loadIconConfiguration();
 
-
         // Initialize service classes
         tabManagementService = new TabManagementService(tabPane);
         fileManagementService = new FileManagementService(tabPane);
@@ -110,7 +110,7 @@ public class CoreController {
 
         // Setup UI components
         setupKeyboardShortcuts();
-        menuBar.useSystemMenuBarProperty().set(true);
+        menuBar.useSystemMenuBarProperty().set(false);
         setupProjectExplorer();
 
         openProjectButton.visibleProperty().bind(isProjectOpen.not());
@@ -124,7 +124,6 @@ public class CoreController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
 
         // Setup left tab pane
         setupLeftTabPane();
@@ -195,22 +194,27 @@ public class CoreController {
     }
 
     private void setupKeyboardShortcuts() {
-        // Ctrl+N: New File
-        newFileItem.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
+        boolean isMac = System.getProperty("os.name").toLowerCase().contains("mac");
 
-        // Ctrl+O: Open Project
-        openProjectItem.setAccelerator(new KeyCodeCombination(KeyCode.O, KeyCombination.SHORTCUT_DOWN));
+        KeyCombination.Modifier primaryModifier = isMac ? KeyCombination.SHORTCUT_DOWN : KeyCombination.CONTROL_DOWN;
 
-        // Ctrl+S: Save File
-        saveFileItem.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
+        // New File
+        newFileItem.setAccelerator(new KeyCodeCombination(KeyCode.N, primaryModifier));
 
-        // Ctrl+W: Close Project
-        closeProjectItem.setAccelerator(new KeyCodeCombination(KeyCode.W, KeyCombination.CONTROL_DOWN));
+        // Open Project
+        openProjectItem.setAccelerator(new KeyCodeCombination(KeyCode.O, primaryModifier));
 
-        // Ctrl+Q: Exit
-        exitItem.setAccelerator(new KeyCodeCombination(KeyCode.Q, KeyCombination.CONTROL_DOWN));
+        // Save File
+        saveFileItem.setAccelerator(new KeyCodeCombination(KeyCode.S, primaryModifier));
 
-        handleFindReplace.setAccelerator(new KeyCodeCombination(KeyCode.F, KeyCombination.SHORTCUT_DOWN));
+        // Close Project
+        closeProjectItem.setAccelerator(new KeyCodeCombination(KeyCode.W, primaryModifier));
+
+        // Exit
+        exitItem.setAccelerator(new KeyCodeCombination(KeyCode.Q, primaryModifier));
+
+        // Find/Replace
+        handleFindReplace.setAccelerator(new KeyCodeCombination(KeyCode.F, primaryModifier));
     }
 
     // Store content for each tab to support dynamic restoration

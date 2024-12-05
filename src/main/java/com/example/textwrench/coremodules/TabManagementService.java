@@ -2,11 +2,7 @@ package com.example.textwrench.coremodules;
 
 import com.example.textwrench.IconLoader.IconConfigLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.ButtonBar;
+import javafx.scene.control.*;
 import org.fxmisc.flowless.VirtualizedScrollPane;
 import org.fxmisc.richtext.CodeArea;
 import org.fxmisc.richtext.LineNumberFactory;
@@ -105,6 +101,15 @@ public class TabManagementService {
 
     public TabPane getTabPane() {
         return tabPane;
+    }
+
+    public void addCaretPositionListener(UIUtilityService uiUtilityService, Label statusBar) {
+        CodeArea codeArea = getCurrentCodeArea();
+        if (codeArea != null) {
+            codeArea.caretPositionProperty().addListener((obs, oldVal, newVal) -> {
+                uiUtilityService.updateStatusBar(this, statusBar);
+            });
+        }
     }
 
     public CodeArea getCurrentCodeArea() {

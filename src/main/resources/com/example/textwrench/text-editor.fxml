@@ -3,76 +3,82 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane fx:id="parentSplitPane" xmlns:fx="http://javafx.com/fxml"
-           fx:controller="com.example.textwrench.CoreController"
-           stylesheets="@styles.css"
-           dividerPositions="0.25">
+<VBox xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.textwrench.CoreController"
+      stylesheets="@styles.css">
 
-    <!-- Vertical TabPane for Project Explorer -->
-    <TabPane side="LEFT" styleClass="left-tab-pane" fx:id="leftTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
-        <tabs>
-            <Tab  text="Explorer">
-                <VBox styleClass="project-explorer">
-                    <!-- Adjusted Header with Label and Button -->
-                    <HBox styleClass="project-explorer-header" spacing="10" alignment="CENTER_LEFT">
-                        <!-- Label stays left-aligned -->
-                        <Label fx:id="projectExplorerLabel" text="Project Explorer" />
+    <!-- MenuBar at the top of the entire layout -->
+    <MenuBar fx:id="menuBar">
+        <menus>
+            <Menu text="File">
+                <items>
+                    <MenuItem fx:id="newFileItem" text="New File" onAction="#createNewFile"/>
+                    <MenuItem fx:id="openProjectItem" text="Open Project" onAction="#openProject"/>
+                    <MenuItem fx:id="closeProjectItem" text="Close Project" onAction="#closeProject"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem fx:id="openFileItem" text="Open" onAction="#openFile"/>
+                    <MenuItem fx:id="saveFileItem" text="Save" onAction="#saveFile"/>
+                    <SeparatorMenuItem/>
+                    <MenuItem fx:id="exitItem" text="Exit" onAction="#handleExit"/>
+                </items>
+            </Menu>
+            <Menu text="Edit">
+                <items>
+                    <MenuItem fx:id="handleFindReplace" text="Find/Replace" onAction="#handleFindReplace" />
+                </items>
+            </Menu>
+            <!-- Other menus -->
+        </menus>
+    </MenuBar>
 
-                        <!-- Spacer to center the button -->
-                        <Region HBox.hgrow="ALWAYS" />
+    <!-- SplitPane below the MenuBar -->
+    <SplitPane fx:id="parentSplitPane"
+               dividerPositions="0.25"
+               VBox.vgrow="ALWAYS"
+               styleClass="rounded-vbox">
 
-                        <!-- Button centered in the available space -->
-                        <Button fx:id="openProjectButton" text="Open Project  ⌘O" onAction="#openProject" />
-                    </HBox>
-                    <TreeView fx:id="projectExplorer" VBox.vgrow="ALWAYS">
-                    </TreeView>
-                </VBox>
-            </Tab>
-            <Tab  text="Plugin Manager">
-                <VBox fx:id="pluginManagerVBox">
-                </VBox>
-            </Tab>
-        </tabs>
-    </TabPane>
+        <!-- Vertical TabPane for Project Explorer -->
+        <TabPane side="LEFT" styleClass="left-tab-pane" fx:id="leftTabPane" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+            <tabs>
+                <Tab text="Explorer">
+                    <VBox styleClass="project-explorer">
+                        <!-- Adjusted Header with Label and Button -->
+                        <HBox styleClass="project-explorer-header" spacing="10" alignment="CENTER_LEFT">
+                            <!-- Label stays left-aligned -->
+                            <Label fx:id="projectExplorerLabel" text="Project Explorer" />
 
-    <!-- Right Pane with Menu, Tabs, and Status Bar -->
-    <VBox styleClass="rounded-vbox">
-        <!-- MenuBar -->
-        <MenuBar fx:id="menuBar">
-            <menus>
-                <Menu text="File">
-                    <items>
-                        <MenuItem fx:id="newFileItem" text="New File" onAction="#createNewFile"/>
-                        <MenuItem fx:id="openProjectItem" text="Open Project" onAction="#openProject"/>
-                        <MenuItem fx:id="closeProjectItem" text="Close Project" onAction="#closeProject"/>
-                        <SeparatorMenuItem/>
-                        <MenuItem fx:id="openFileItem" text="Open" onAction="#openFile"/>
-                        <MenuItem fx:id="saveFileItem" text="Save" onAction="#saveFile"/>
-                        <SeparatorMenuItem/>
-                        <MenuItem fx:id="exitItem" text="Exit" onAction="#handleExit"/>
-                    </items>
-                </Menu>
-                <Menu text="Edit">
-                    <items>
-                        <MenuItem fx:id="handleFindReplace" text="Find/Replace" onAction="#handleFindReplace" />
-                    </items>
-                </Menu>
-                <!-- Other menus -->
-            </menus>
-        </MenuBar>
+                            <!-- Spacer to center the button -->
+                            <Region HBox.hgrow="ALWAYS" />
 
-        <!-- Find/Replace UI Container -->
-        <VBox fx:id="findReplaceContainer" spacing="10" alignment="CENTER"/>
-
-        <!-- Tabbed Interface -->
-        <TabPane tabClosingPolicy="ALL_TABS" fx:id="tabPane" VBox.vgrow="ALWAYS" styleClass="text-area">
-            <!-- Tabs will be dynamically added here -->
+                            <!-- Button centered in the available space -->
+                            <Button fx:id="openProjectButton" text="Open Project  ⌘O" onAction="#openProject" />
+                        </HBox>
+                        <TreeView fx:id="projectExplorer" VBox.vgrow="ALWAYS">
+                        </TreeView>
+                    </VBox>
+                </Tab>
+                <Tab text="Plugin Manager">
+                    <VBox fx:id="pluginManagerVBox">
+                    </VBox>
+                </Tab>
+            </tabs>
         </TabPane>
 
-        <!-- Status Bar -->
-        <Label
-                fx:id="statusBar"
-                styleClass="status-bar"
-                text="Ready"/>
-    </VBox>
-</SplitPane>
+        <!-- Right Pane with Tabs and Status Bar -->
+        <VBox>
+            <!-- Find/Replace UI Container -->
+            <VBox fx:id="findReplaceContainer" spacing="10" alignment="CENTER"/>
+
+            <!-- Tabbed Interface -->
+            <TabPane tabClosingPolicy="ALL_TABS" fx:id="tabPane" VBox.vgrow="ALWAYS" styleClass="text-area">
+                <!-- Tabs will be dynamically added here -->
+            </TabPane>
+
+            <!-- Status Bar -->
+            <Label
+                    fx:id="statusBar"
+                    styleClass="status-bar"
+                    text="Ready"/>
+        </VBox>
+    </SplitPane>
+</VBox>

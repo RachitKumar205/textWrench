@@ -384,3 +384,84 @@
     -fx-font-size: 14px;
 }
 
+/* Menu Styling */
+.menu-bar {
+    -fx-background-color: #2d2d2d; /* Slightly lighter gray */
+    -fx-border-color: #3c3c3c; /* Subtle border for separation */
+    -fx-border-width: 0 0 1px 0; /* Border below the menu */
+    -fx-padding: 5px; /* Add padding for better spacing */
+    -fx-font-family: "Rubik Regular"; /* Consistent font family */
+}
+
+.menu-item {
+    -fx-background-color: transparent; /* Default transparent */
+    -fx-text-fill: #d4d4d4; /* Light gray text */
+    -fx-padding: 5px 10px; /* Padding for better alignment */
+    -fx-font-family: "Rubik Regular"; /* Consistent font family */
+    -fx-font-size: 14px; /* Standard font size */
+    -fx-border-radius: 3px; /* Slight rounding for hover effect */
+}
+
+.menu-item:hover {
+    -fx-background-color: #414141; /* Darker hover background */
+    -fx-text-fill: #ffffff; /* Bright text on hover */
+}
+
+.menu-item:selected {
+    -fx-background-color: #1b54a1; /* Blue background for selection */
+    -fx-text-fill: #ffffff; /* White text for selected item */
+}
+
+.menu .separator {
+    -fx-background-color: transparent; /* Divider color */
+    -fx-padding: 2px 0; /* Slight padding around separators */
+    -fx-border-radius: 1px; /* Rounded edges for separator */
+}
+
+/* Submenu Styling */
+.context-menu {
+    -fx-background-color: #2d2d2d; /* Match menu bar background */
+    -fx-border-color: #3c3c3c; /* Border for definition */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-background-radius: 5px; /* Consistent with border */
+    -fx-padding: 5px; /* Internal padding for items */
+}
+
+.context-menu .menu-item {
+    -fx-background-color: transparent; /* Transparent default */
+    -fx-text-fill: #d4d4d4; /* Light gray text */
+    -fx-padding: 5px 10px; /* Padding for consistency */
+    -fx-border-radius: 5px; /* Rounded corners for hover effect */
+}
+
+.context-menu .menu-item:hover {
+    -fx-background-color: #515459; /* Slightly darker hover effect */
+    -fx-text-fill: #ffffff; /* Brighter text */
+    -fx-background-radius: 5px;
+}
+
+
+.context-menu .menu-item:selected {
+    -fx-background-color: #1b54a1; /* Match menu item selection */
+    -fx-text-fill: #ffffff; /* White text for selected item */
+    -fx-background-radius: 5px;
+}
+
+.menu:hover {
+    -fx-background-color: #414141;    /* Dark gray hover effect */
+    -fx-text-fill: white;             /* Brighter text on hover */
+    -fx-background-radius: 3;
+}
+
+.menu:selected {
+    -fx-background-color: #1b54a1;    /* Blue selection highlight */
+    -fx-text-fill: white;             /* White text when selected */
+    -fx-background-radius: 3px;
+}
+
+.menu:showing {
+    -fx-background-color: #414141;    /* Dark gray hover effect */
+    -fx-text-fill: white;             /* Brighter text on hover */
+    -fx-background-radius: 3;
+}
+

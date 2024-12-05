@@ -1,6 +1,8 @@
 package com.example.textwrench.coremodules;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
+import org.fxmisc.richtext.CodeArea;
 
 public class UIUtilityService {
     public void showAlert(String title, String message) {
@@ -11,12 +13,17 @@ public class UIUtilityService {
         alert.showAndWait();
     }
 
-    public void updateStatusBar(TabManagementService tabManagementService, javafx.scene.control.Label statusBar) {
-        var currentCodeArea = tabManagementService.getCurrentCodeArea();
+    public void updateStatusBar(TabManagementService tabManagementService, Label statusBar) {
+        CodeArea currentCodeArea = tabManagementService.getCurrentCodeArea();
         if (currentCodeArea != null) {
-            int lineCount = currentCodeArea.getText().split("\n").length;
-            int charCount = currentCodeArea.getText().length();
-            statusBar.setText("Lines: " + lineCount + " | Characters: " + charCount);
+            int lineCount = currentCodeArea.getParagraphs().size();
+            int charCount = currentCodeArea.getLength();
+            int caretPosition = currentCodeArea.getCaretPosition();
+            int lineNumber = currentCodeArea.getText(0, caretPosition).split("\n").length;
+            int lineStartIndex = currentCodeArea.getText().lastIndexOf('\n', caretPosition - 1) + 1;
+            int indexInLine = caretPosition - lineStartIndex;
+            String firstLine = currentCodeArea.getText().split("\n")[0];
+            statusBar.setText("Ready");
         } else {
             statusBar.setText("Ready");
         }

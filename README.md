@@ -4,7 +4,7 @@ textWrench is a text editor application built using Java and JavaFX. It provides
 
 ## Requirements
 
-- Java 23 or higher
+- JDK 23.0 or higher
 - Maven
 - JavaFX 23.0.1
 
